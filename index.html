@@ -85,11 +85,7 @@ using Flask&#8217;s familiar decorator syntax.</p>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <p>Install the extension with:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ pip install flask-classy
-</pre></div>
-</div>
-<p>or if you&#8217;re kickin&#8217; it old-school:</p>
-<div class="highlight-python"><div class="highlight"><pre>$ easy_install flask-classy
+<div class="highlight-python"><div class="highlight"><pre>$ pip install git+https://github.com/teracyhq/flask-classy.git@develop#egg=flask-classy
 </pre></div>
 </div>
 </div>
@@ -970,11 +966,120 @@ the data, add it to the <cite>representations</cite> variable on your <cite>Flas
 <div class="section" id="questions">
 <h2>Questions?<a class="headerlink" href="#questions" title="Permalink to this headline">¶</a></h2>
 <p>Feel free to ping me on twitter &#64;teracyhq, or head on over to the
-github repo at <a class="reference external" href="http://github.com/teracyhq/flask-classy">http://github.com/teracyhq/flask-classy</a> so you can join
+github repo at <a class="reference external" href="https://github.com/teracyhq/flask-classy">https://github.com/teracyhq/flask-classy</a> so you can join
 the fun.</p>
 </div>
 <div class="section" id="api">
 <h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="flask.ext.classy.FlaskView">
+<em class="property">class </em><code class="descclassname">flask.ext.classy.</code><code class="descname">FlaskView</code><a class="headerlink" href="#flask.ext.classy.FlaskView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base view for any class based views implemented with Flask-Classy. Will
+automatically configure routes when registered with a Flask app instance.</p>
+<dl class="classmethod">
+<dt id="flask.ext.classy.FlaskView.build_route_name">
+<em class="property">classmethod </em><code class="descname">build_route_name</code><span class="sig-paren">(</span><em>method_name</em><span class="sig-paren">)</span><a class="headerlink" href="#flask.ext.classy.FlaskView.build_route_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a unique route name based on the combination of the class
+name with the method name.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>method_name</strong> &#8211; the method name to use when building a route name</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="flask.ext.classy.FlaskView.build_rule">
+<em class="property">classmethod </em><code class="descname">build_rule</code><span class="sig-paren">(</span><em>rule</em>, <em>method=None</em><span class="sig-paren">)</span><a class="headerlink" href="#flask.ext.classy.FlaskView.build_rule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a routing rule based on either the class name (minus the
+&#8216;View&#8217; suffix) or the defined <cite>route_base</cite> attribute of the class</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>rule</strong> &#8211; the path portion that should be appended to the
+route base</li>
+<li><strong>method</strong> &#8211; if a method&#8217;s arguments should be considered when
+constructing the rule, provide a reference to the
+method here. arguments named &#8220;self&#8221; will be ignored</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="flask.ext.classy.FlaskView.get_route_base">
+<em class="property">classmethod </em><code class="descname">get_route_base</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#flask.ext.classy.FlaskView.get_route_base" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the route base to use for the current class.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="flask.ext.classy.FlaskView.make_proxy_method">
+<em class="property">classmethod </em><code class="descname">make_proxy_method</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#flask.ext.classy.FlaskView.make_proxy_method" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates a proxy function that can be used by Flasks routing. The
+proxy instantiates the FlaskView subclass and calls the appropriate
+method.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>name</strong> &#8211; the name of the method to create a proxy for</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="flask.ext.classy.FlaskView.parse_options">
+<em class="property">classmethod </em><code class="descname">parse_options</code><span class="sig-paren">(</span><em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#flask.ext.classy.FlaskView.parse_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extracts subdomain and endpoint values from the options dict and returns
+them along with a new dict without those values.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="flask.ext.classy.FlaskView.register">
+<em class="property">classmethod </em><code class="descname">register</code><span class="sig-paren">(</span><em>app</em>, <em>route_base=None</em>, <em>subdomain=None</em>, <em>route_prefix=None</em>, <em>trailing_slash=None</em><span class="sig-paren">)</span><a class="headerlink" href="#flask.ext.classy.FlaskView.register" title="Permalink to this definition">¶</a></dt>
+<dd><p>Registers a FlaskView class for use with a specific instance of a
+Flask app. Any methods not prefixes with an underscore are candidates
+to be routed and will have routes registered when this method is
+called.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>app</strong> &#8211; an instance of a Flask application</li>
+<li><strong>route_base</strong> &#8211; The base path to use for all routes registered for
+this class. Overrides the route_base attribute if
+it has been set.</li>
+<li><strong>subdomain</strong> &#8211; A subdomain that this registration should use when
+configuring routes.</li>
+<li><strong>route_prefix</strong> &#8211; A prefix to be applied to all routes registered
+for this class. Precedes route_base. Overrides
+the class&#8217; route_prefix if it has been set.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="flask.ext.classy.route">
+<code class="descclassname">flask.ext.classy.</code><code class="descname">route</code><span class="sig-paren">(</span><em>rule</em>, <em>**options</em><span class="sig-paren">)</span><a class="headerlink" href="#flask.ext.classy.route" title="Permalink to this definition">¶</a></dt>
+<dd><p>A decorator that is used to define custom routes for methods in
+FlaskView subclasses. The format is exactly the same as Flask&#8217;s
+<cite>&#64;app.route</cite> decorator.</p>
+</dd></dl>
+
 <hr class="docutils" />
 <p>© Copyright 2013 by Freedom Dumlao, <a class="reference external" href="https://twitter.com/APIguy">Follow Me &#64;apiguy</a></p>
 </div>
@@ -1058,7 +1163,7 @@ the fun.</p>
       </div>
       <div class="clearer"></div>
     </div>
-<a href="http://github.com/apiguy/flask-classy">
+<a href="http://github.com/teracyhq/flask-classy">
     <img style="position: fixed; top: 0; right: 0; border: 0;"
          src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"
          alt="Fork me on GitHub"/></a>
@@ -1071,20 +1176,13 @@ the fun.</p>
 </div>
 
 <script>
-    (function (i, s, o, g, r, a, m) {
-        i['GoogleAnalyticsObject'] = r;
-        i[r] = i[r] || function () {
-            (i[r].q = i[r].q || []).push(arguments)
-        }, i[r].l = 1 * new Date();
-        a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0];
-        a.async = 1;
-        a.src = g;
-        m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    ga('create', 'UA-36841119-3', 'pythonhosted.org');
-    ga('send', 'pageview');
+  ga('create', 'UA-42868657-8', 'auto');
+  ga('send', 'pageview');
 
 </script>
   </body>
