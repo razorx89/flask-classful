@@ -939,13 +939,11 @@ the data, add it to the <cite>representations</cite> variable on your <cite>Flas
 <span class="k">def</span> <span class="nf">output_json</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
     <span class="n">content_type</span> <span class="o">=</span> <span class="s1">&#39;application/json&#39;</span>
     <span class="n">dumped</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">(</span><span class="n">dumped</span><span class="p">,</span> <span class="n">code</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">headers</span><span class="p">:</span>
-        <span class="n">headers</span><span class="o">.</span><span class="n">extend</span><span class="p">({</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">:</span> <span class="n">content_type</span><span class="p">})</span>
+        <span class="n">headers</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">:</span> <span class="n">content_type</span><span class="p">})</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Content-Type&#39;</span><span class="p">:</span> <span class="n">content_type</span><span class="p">}</span>
-    <span class="n">response</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span>
-
+    <span class="n">response</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">(</span><span class="n">dumped</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">response</span>
 </pre></div>
 </div>
