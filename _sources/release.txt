@@ -3,34 +3,26 @@ Release Steps
 
 Follow: http://dev.teracy.org/docs/release_process.html
 
+Next iteration
+--------------
+
+Update next iteration for develop branch:
+- flask_classful.py
+- docs/conf.py
+
 CHANGELOG
 ---------
 
 update the change log
 
 
-flask_classy.py
----------------
+flask_classful.py
+-----------------
 
 update this line for the right version:
 ::
+
   __version__ = "0.7.0-dev0"
-
-
-README.rst
-----------
-
-update this line for the right version:
-::
-  $ pip install git+https://github.com/teracyhq/flask-classy.git@develop#egg=flask-classy
-
-
-docs/index.rst
---------------
-
-update this line for the right version:
-::
-  $ pip install git+https://github.com/teracyhq/flask-classy.git@develop#egg=flask-classy
 
 
 docs/conf.py
