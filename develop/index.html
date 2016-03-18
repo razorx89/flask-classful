@@ -79,9 +79,20 @@ views for the same resource into a single class.</p>
 <p>&#8220;But my projects aren&#8217;t that big. Can Flask-Classful do
 anything else for me besides making a big project easier to manage?&#8221;</p>
 <p>Why yes. It does help a bit with some other things.</p>
-<p>For example, <cite>Flask-Classful</cite> will automatically generate routes based on the methods
+<p>For example, <code class="docutils literal"><span class="pre">Flask-Classful</span></code> will automatically generate routes based on the methods
 in your views, and makes it super simple to override those routes
 using Flask&#8217;s familiar decorator syntax.</p>
+<div class="section" id="about-flask-classful-vs-flask-classy-and-how-to-migrate">
+<h2>About Flask-Classful vs Flask-Classy and how to migrate<a class="headerlink" href="#about-flask-classful-vs-flask-classy-and-how-to-migrate" title="Permalink to this headline">¶</a></h2>
+<p>This is a fork of original <code class="docutils literal"><span class="pre">Flask-Classy</span></code> for continuing its development since the original
+project was not updated for a long time. For more information, see:
+<a class="reference external" href="https://github.com/apiguy/flask-classy/issues/80">https://github.com/apiguy/flask-classy/issues/80</a></p>
+<p>If you switch from <code class="docutils literal"><span class="pre">Flask-Classy</span></code> to <code class="docutils literal"><span class="pre">Flask-Classful</span></code>, you just need to update the module import,
+the APIs are the same for both.</p>
+<p><code class="docutils literal"><span class="pre">from</span> <span class="pre">flask.ext.class_classy</span></code> =&gt; <code class="docutils literal"><span class="pre">from</span> <span class="pre">flask_classful</span></code> (recommended) or <code class="docutils literal"><span class="pre">from</span> <span class="pre">flask.ext.class_classy</span></code></p>
+<p><code class="docutils literal"><span class="pre">from</span> <span class="pre">flask_classy</span></code> =&gt; <code class="docutils literal"><span class="pre">from</span> <span class="pre">flask_classful</span></code></p>
+<p>You can switch back to <code class="docutils literal"><span class="pre">flask_classy</span></code> if you like by doing the reverse.</p>
+</div>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <p>Install the latest extension with:</p>
@@ -1097,6 +1108,7 @@ FlaskView subclasses. The format is exactly the same as Flask&#8217;s
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Flask-Classful</a><ul>
+<li><a class="reference internal" href="#about-flask-classful-vs-flask-classy-and-how-to-migrate">About Flask-Classful vs Flask-Classy and how to migrate</a></li>
 <li><a class="reference internal" href="#installation">Installation</a></li>
 <li><a class="reference internal" href="#let-s-see-how-it-works">Let&#8217;s see how it works</a></li>
 <li><a class="reference internal" href="#using-custom-routes">Using custom routes</a><ul>
