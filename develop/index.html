@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Flask-Classy &mdash; Flask Classy 0.9.0-dev0 documentation</title>
+    <title>Flask-Classful &mdash; Flask Classy 0.9.0-dev0 documentation</title>
     
     <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -54,9 +54,9 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="module-flask_classy">
-<span id="flask-classy"></span><h1>Flask-Classy<a class="headerlink" href="#module-flask_classy" title="Permalink to this headline">¶</a></h1>
-<p>Flask-Classy is an extension that adds class-based views to Flask.
+  <div class="section" id="module-flask_classful">
+<span id="flask-classful"></span><h1>Flask-Classful<a class="headerlink" href="#module-flask_classful" title="Permalink to this headline">¶</a></h1>
+<p>Flask-Classful is an extension that adds class-based views to Flask.
 But why?</p>
 <p>I ❤ Flask. Like a lot. But sometimes projects get a little big
 and I need some way of managing and organizing all the different
@@ -69,23 +69,27 @@ behavior. It&#8217;s also made testing really nifty too.</p>
 <p>&#8220;OK, I see your point. But can&#8217;t I just use the base classes in
 <code class="docutils literal"><span class="pre">flask.views</span></code> to do that?&#8221;</p>
 <p>Well, yes and no. While <code class="docutils literal"><span class="pre">flask.views.MethodView</span></code> does
-provide some of the functionality of <code class="docutils literal"><span class="pre">flask_classy.FlaskView</span></code>
+provide some of the functionality of <code class="docutils literal"><span class="pre">flask_classful.FlaskView</span></code>
 it doesn&#8217;t quite complete the picture by supporting methods that
 aren&#8217;t part of the typical CRUD operations for a given resource, or
 make it easy for me to override the route rules for particular view.
 And while <code class="docutils literal"><span class="pre">flask.views.View</span></code> does add some context, it requires
 a class for each view instead of letting me group very similar
 views for the same resource into a single class.</p>
-<p>&#8220;But my projects aren&#8217;t that big. Can Flask-Classy do
+<p>&#8220;But my projects aren&#8217;t that big. Can Flask-Classful do
 anything else for me besides making a big project easier to manage?&#8221;</p>
 <p>Why yes. It does help a bit with some other things.</p>
-<p>For example, <cite>Flask-Classy</cite> will automatically generate routes based on the methods
+<p>For example, <cite>Flask-Classful</cite> will automatically generate routes based on the methods
 in your views, and makes it super simple to override those routes
 using Flask&#8217;s familiar decorator syntax.</p>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
-<p>Install the extension with:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>$ pip install git+https://github.com/teracyhq/flask-classy.git@develop#egg=flask-classy
+<p>Install the latest extension with:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>$ pip install flask-classful -U
+</pre></div>
+</div>
+<p>Or install the bleeding edge development version with:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>$ pip install git+https://github.com/teracyhq/flask-classful.git@develop#egg=flask-classful
 </pre></div>
 </div>
 </div>
@@ -93,9 +97,9 @@ using Flask&#8217;s familiar decorator syntax.</p>
 <h2>Let&#8217;s see how it works<a class="headerlink" href="#let-s-see-how-it-works" title="Permalink to this headline">¶</a></h2>
 <p>If you&#8217;re like me, you probably get a better idea of how to use something
 when you see it being used. Let&#8217;s go ahead and create a little app to
-see how Flask-Classy works:</p>
+see how Flask-Classful works:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
-<span class="kn">from</span> <span class="nn">flask_classy</span> <span class="kn">import</span> <span class="n">FlaskView</span>
+<span class="kn">from</span> <span class="nn">flask_classful</span> <span class="kn">import</span> <span class="n">FlaskView</span>
 
 <span class="c1"># we&#39;ll make a list to hold some quotes for our app</span>
 <span class="n">quotes</span> <span class="o">=</span> <span class="p">[</span>
@@ -154,7 +158,7 @@ that a random quote is returned each time. Voilà!</p>
 <p>So by now you must be keenly aware of the fact that you have not defined a
 single route, but yet routing is obviously taking place. &#8220;Is this voodoo?&#8221;
 you ask?</p>
-<p>Not at all. Flask-Classy will automatically create routes for any method
+<p>Not at all. Flask-Classful will automatically create routes for any method
 in a FlaskView that doesn&#8217;t begin with an underscore character.
 You can still define your own routes of course, and we&#8217;ll look at that next.</p>
 </div>
@@ -165,7 +169,7 @@ fix it to be something more spectacular forthwith. In a moment of blind
 inspiration we decide that getting a random quote is on par with receiving
 a rasher of your favorite porcine delicacy. The new URL should be <cite>/quotes/word_bacon/</cite>
 so that everyone knows what a treat they are in for.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask_classy</span> <span class="kn">import</span> <span class="n">FlaskView</span><span class="p">,</span> <span class="n">route</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask_classful</span> <span class="kn">import</span> <span class="n">FlaskView</span><span class="p">,</span> <span class="n">route</span>
 </pre></div>
 </div>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">QuotesView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
@@ -195,11 +199,11 @@ have probably deduced that it was derived from the name of your FlaskView
 instance (minus the &#8220;View&#8221; suffix, of course.) &#8220;That&#8217;s all well and good,&#8221;
 you&#8217;re saying, &#8220;but how do I change that? What if I want my views at the
 root?&#8221; Well, person, I have an answer for you.</p>
-<div class="section" id="flask-classy-s-way-of-talking-about-routes">
-<h3>Flask-Classy&#8217;s way of talking about &#8220;routes&#8221;<a class="headerlink" href="#flask-classy-s-way-of-talking-about-routes" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="flask-classful-s-way-of-talking-about-routes">
+<h3>Flask-Classful&#8217;s way of talking about &#8220;routes&#8221;<a class="headerlink" href="#flask-classful-s-way-of-talking-about-routes" title="Permalink to this headline">¶</a></h3>
 <p>OK, So I don&#8217;t want to start inventing a new language (actually I&#8217;d love to
 invent a new language, just not right now...) for talking about URLs, but
-since Flask-Classy gives you a lot of flexibility in customizing your routes
+since Flask-Classful gives you a lot of flexibility in customizing your routes
 we might as well make sure we&#8217;re talking about the same things when we talk
 about what you can do.</p>
 <p>What you see below is a route comprised of a route prefix, and a route base:</p>
@@ -212,7 +216,7 @@ inferred automatically from the name of the FlaskView class, or because you
 specified a route base to use.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">Flask-Classy favors putting trailing slashes at the end of routes without parameters.
+<p class="last">Flask-Classful favors putting trailing slashes at the end of routes without parameters.
 You can override this behavior by specifying <cite>trailing_slash=False</cite> either
 as an attribute of your <cite>FlaskView</cite> or in the <cite>register</cite> method.</p>
 </div>
@@ -398,7 +402,7 @@ like you.</p>
 <div class="section" id="special-method-names">
 <h2>Special method names<a class="headerlink" href="#special-method-names" title="Permalink to this headline">¶</a></h2>
 <p>So I guess I have to break the narrative a bit here so I can take some
-time to talk about <cite>Flask-Classy</cite>&#8216;s special method names.</p>
+time to talk about <cite>Flask-Classful</cite>&#8216;s special method names.</p>
 <p>Here&#8217;s the thing. <cite>FlaskView</cite> is smart. No, not solving differential
 equations smart, but let&#8217;s just say it knows how to put the round peg
 in the round hole. When you register a <cite>FlaskView</cite> with an app,
@@ -549,7 +553,7 @@ am the least skilled at, so please bear with me.</p>
 to get the URLs for it in your templates and redirects and whatnot. Flask
 ships with the awesome <cite>url_for</cite> function that does an excellent job of
 turning a function name into a URL that maps to it. You can use <cite>url_for</cite>
-with Flask-Classy by using the format &#8220;&lt;Class name&gt;:&lt;method name&gt;&#8221;. Let&#8217;s
+with Flask-Classful by using the format &#8220;&lt;Class name&gt;:&lt;method name&gt;&#8221;. Let&#8217;s
 look at an example:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DuckyView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -670,7 +674,7 @@ FlaskView&#8217;s too.:</p>
 <p>But what about when you want to add a decorator to every method in your
 <cite>FlaskView</cite>? All you need to do is add a <cite>decorators</cite> attribute to the
 class definition with a list of decorators you want applied to every
-method and <cite>Flask-Classy</cite> will take care of the rest:</p>
+method and <cite>Flask-Classful</cite> will take care of the rest:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">WhataGreatView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
     <span class="n">decorators</span> <span class="o">=</span> <span class="p">[</span><span class="n">login_required</span><span class="p">]</span>
 
@@ -690,20 +694,20 @@ decorated methods? Remember how you only wanted some of them to run for
 certain views so you had all those <code class="docutils literal"><span class="pre">if</span> <span class="pre">view</span> <span class="pre">==</span> <span class="pre">the_one_I_care_about:</span></code>
 statements and stuff?</p>
 <p><strong>Yuck.</strong></p>
-<p>I&#8217;ve been there too, and I think you might like how <cite>Flask-Classy</cite>
+<p>I&#8217;ve been there too, and I think you might like how <cite>Flask-Classful</cite>
 addresses this very touchy issue. <code class="docutils literal"><span class="pre">FlaskView</span></code> will look for wrapper
 methods when your request is being processed so that you can create more
 fine grained &#8220;before and after&#8221; processing methods.</p>
 <div class="section" id="wrap-all-the-views-in-a-flaskview">
 <h3>Wrap all the views in a FlaskView<a class="headerlink" href="#wrap-all-the-views-in-a-flaskview" title="Permalink to this headline">¶</a></h3>
 <p>So there you are, eating a delicious Strawberry Frosted Pop Tart one
-morning, thinking about the awesome <cite>Flask-Classy</cite> app you deployed the
+morning, thinking about the awesome <cite>Flask-Classful</cite> app you deployed the
 night before during one of your late night hackathons and it hits you:</p>
 <p><em>&#8220;Tracking! I need to track those widgets!&#8221;</em></p>
 <p>No doubt it&#8217;s an inspired thought, but in this case it was a tragic
 oversight. You realize now how lucky it was that you chose to use
-<cite>Flask-Classy</cite> because adding tracking is going to be a snap:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask_classy</span> <span class="kn">import</span> <span class="n">FlaskView</span>
+<cite>Flask-Classful</cite> because adding tracking is going to be a snap:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask_classful</span> <span class="kn">import</span> <span class="n">FlaskView</span>
 <span class="kn">from</span> <span class="nn">made_up_tracking</span> <span class="kn">import</span> <span class="n">track_it</span>
 
 <span class="k">class</span> <span class="nc">WidgetsView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
@@ -724,18 +728,18 @@ oversight. You realize now how lucky it was that you chose to use
 </div>
 <p>Whew. Crisis averted, am I right? So you go about your day and at lunch time
 you hit your favorite Bacon Sandwich place and start daydreaming about your
-life as a rockstar <cite>Flask-Classy</cite> consultant when suddenly:</p>
+life as a rockstar <cite>Flask-Classful</cite> consultant when suddenly:</p>
 <p><em>&#8220;I really only care about when widgets are created and retrieved!&#8221;</em></p>
 </div>
 <div class="section" id="wrap-only-specific-views">
 <h3>Wrap only specific views<a class="headerlink" href="#wrap-only-specific-views" title="Permalink to this headline">¶</a></h3>
 <p>Yep, you&#8217;ve got a granularity problem. Not to worry though because
-<cite>Flask-Classy</cite> is happy to let you know that it has <em>smart</em> wrapper methods
+<cite>Flask-Classful</cite> is happy to let you know that it has <em>smart</em> wrapper methods
 too. Let&#8217;s say for example you wanted to run something before the <code class="docutils literal"><span class="pre">index</span></code> view
-runs? Just create a method called <code class="docutils literal"><span class="pre">before_index</span></code> and <cite>Flask-Classy</cite> will make
+runs? Just create a method called <code class="docutils literal"><span class="pre">before_index</span></code> and <cite>Flask-Classful</cite> will make
 sure it gets run only before that view. (as you have guessed by now,
 <code class="docutils literal"><span class="pre">after_index</span></code> will be run only after the index view).</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask_classy</span> <span class="kn">import</span> <span class="n">FlaskView</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask_classful</span> <span class="kn">import</span> <span class="n">FlaskView</span>
 <span class="kn">from</span> <span class="nn">made_up_tracking</span> <span class="kn">import</span> <span class="n">track_it</span>
 
 <span class="k">class</span> <span class="nc">WidgetsView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
@@ -836,10 +840,10 @@ term <em>reliable</em>.</p>
 </div>
 <div class="section" id="subdomains-getting-advanced-n-stuff">
 <h2>Subdomains (getting advanced &#8216;n stuff)<a class="headerlink" href="#subdomains-getting-advanced-n-stuff" title="Permalink to this headline">¶</a></h2>
-<p>By now, you&#8217;ve built a few hundred <cite>Flask</cite> apps using <cite>Flask-Classy</cite>
+<p>By now, you&#8217;ve built a few hundred <cite>Flask</cite> apps using <cite>Flask-Classful</cite>
 and you probably think you&#8217;re an expert. But not until you&#8217;ve tried
 the snazzy <cite>Subdomains</cite> feature my friend.</p>
-<p>Flask-Classy allows you to specify a subdomain to be used when
+<p>Flask-Classful allows you to specify a subdomain to be used when
 registering routes for your FlaskViews. While the usefulness of this
 feature is probably apparent to many of you, let&#8217;s go ahead and take a
 look at one of the many facilitative use cases.</p>
@@ -849,8 +853,8 @@ a subdomain like <code class="docutils literal"><span class="pre">api.socool.biz
 it using <code class="docutils literal"><span class="pre">api</span></code> at the root of the path like <code class="docutils literal"><span class="pre">socool.biz/api</span></code>. The
 only catch, of course, is that you have API clients still using that
 old path based method. What is a hard working developer like you to do?</p>
-<p>Thanks to <cite>Flask</cite> and <cite>Flask-Classy</cite> you have some options. There are two
-easy ways you can choose from to tell <cite>Flask-Classy</cite> which subdomains your
+<p>Thanks to <cite>Flask</cite> and <cite>Flask-Classful</cite> you have some options. There are two
+easy ways you can choose from to tell <cite>Flask-Classful</cite> which subdomains your
 <code class="docutils literal"><span class="pre">FlaskView</span></code> should respond to.</p>
 <p>Let&#8217;s see both methods so you can choose which one works best for your
 application.</p>
@@ -860,7 +864,7 @@ application.</p>
 want to support at the same time you&#8217;re registering your views:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># views.py</span>
 
-<span class="kn">from</span> <span class="nn">flask_classy</span> <span class="kn">import</span> <span class="n">FlaskView</span>
+<span class="kn">from</span> <span class="nn">flask_classful</span> <span class="kn">import</span> <span class="n">FlaskView</span>
 
 <span class="k">class</span> <span class="nc">CoolApiView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
 
@@ -893,7 +897,7 @@ want to support at the same time you&#8217;re registering your views:</p>
 the <code class="docutils literal"><span class="pre">FlaskView</span></code> subclass:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># views.py</span>
 
-<span class="kn">from</span> <span class="nn">flask_classy</span> <span class="kn">import</span> <span class="n">FlaskView</span>
+<span class="kn">from</span> <span class="nn">flask_classful</span> <span class="kn">import</span> <span class="n">FlaskView</span>
 
 <span class="k">class</span> <span class="nc">CoolApiView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
     <span class="n">subdomain</span> <span class="o">=</span> <span class="s2">&quot;api&quot;</span>
@@ -926,7 +930,7 @@ override the explicit subdomain attribute set inside the class.</p>
 </div>
 <div class="section" id="adding-resource-representations-get-real-classy-and-put-on-a-top-hat">
 <h2>Adding Resource Representations (Get real classy and put on a top hat)<a class="headerlink" href="#adding-resource-representations-get-real-classy-and-put-on-a-top-hat" title="Permalink to this headline">¶</a></h2>
-<p>So, you want to use Flask-Classy to make a RESTful API. Not a problem, we got
+<p>So, you want to use Flask-Classful to make a RESTful API. Not a problem, we got
 you covered. Say you want your API to be able to respond to requests with JSON.
 All you have to do is create a class that defines how to serialize and deserialize
 the data, add it to the <cite>representations</cite> variable on your <cite>FlaskView</cite>.</p>
@@ -950,7 +954,7 @@ the data, add it to the <cite>representations</cite> variable on your <cite>Flas
 <p>The go ahead and add this new resource representation to your <cite>FlaskView</cite>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># views.py</span>
 
-<span class="kn">from</span> <span class="nn">flask_classy</span> <span class="kn">import</span> <span class="n">FlaskView</span>
+<span class="kn">from</span> <span class="nn">flask_classful</span> <span class="kn">import</span> <span class="n">FlaskView</span>
 <span class="kn">from</span> <span class="nn">representations</span> <span class="kn">import</span> <span class="n">output_json</span>
 
 <span class="k">class</span> <span class="nc">CoolJSONView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
@@ -964,19 +968,19 @@ the data, add it to the <cite>representations</cite> variable on your <cite>Flas
 <div class="section" id="questions">
 <h2>Questions?<a class="headerlink" href="#questions" title="Permalink to this headline">¶</a></h2>
 <p>Feel free to ping me on twitter &#64;teracyhq, or head on over to the
-github repo at <a class="reference external" href="https://github.com/teracyhq/flask-classy">https://github.com/teracyhq/flask-classy</a> so you can join
+github repo at <a class="reference external" href="https://github.com/teracyhq/flask-classful">https://github.com/teracyhq/flask-classful</a> so you can join
 the fun.</p>
 </div>
 <div class="section" id="api">
 <h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="flask_classy.FlaskView">
-<em class="property">class </em><code class="descclassname">flask_classy.</code><code class="descname">FlaskView</code><a class="headerlink" href="#flask_classy.FlaskView" title="Permalink to this definition">¶</a></dt>
-<dd><p>Base view for any class based views implemented with Flask-Classy. Will
+<dt id="flask_classful.FlaskView">
+<em class="property">class </em><code class="descclassname">flask_classful.</code><code class="descname">FlaskView</code><a class="headerlink" href="#flask_classful.FlaskView" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base view for any class based views implemented with Flask-Classful. Will
 automatically configure routes when registered with a Flask app instance.</p>
 <dl class="classmethod">
-<dt id="flask_classy.FlaskView.build_route_name">
-<em class="property">classmethod </em><code class="descname">build_route_name</code><span class="sig-paren">(</span><em>method_name</em><span class="sig-paren">)</span><a class="headerlink" href="#flask_classy.FlaskView.build_route_name" title="Permalink to this definition">¶</a></dt>
+<dt id="flask_classful.FlaskView.build_route_name">
+<em class="property">classmethod </em><code class="descname">build_route_name</code><span class="sig-paren">(</span><em>method_name</em><span class="sig-paren">)</span><a class="headerlink" href="#flask_classful.FlaskView.build_route_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a unique route name based on the combination of the class
 name with the method name.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -990,8 +994,8 @@ name with the method name.</p>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="flask_classy.FlaskView.build_rule">
-<em class="property">classmethod </em><code class="descname">build_rule</code><span class="sig-paren">(</span><em>rule</em>, <em>method=None</em><span class="sig-paren">)</span><a class="headerlink" href="#flask_classy.FlaskView.build_rule" title="Permalink to this definition">¶</a></dt>
+<dt id="flask_classful.FlaskView.build_rule">
+<em class="property">classmethod </em><code class="descname">build_rule</code><span class="sig-paren">(</span><em>rule</em>, <em>method=None</em><span class="sig-paren">)</span><a class="headerlink" href="#flask_classful.FlaskView.build_rule" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a routing rule based on either the class name (minus the
 &#8216;View&#8217; suffix) or the defined <cite>route_base</cite> attribute of the class</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -1012,14 +1016,14 @@ method here. arguments named &#8220;self&#8221; will be ignored</li>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="flask_classy.FlaskView.get_route_base">
-<em class="property">classmethod </em><code class="descname">get_route_base</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#flask_classy.FlaskView.get_route_base" title="Permalink to this definition">¶</a></dt>
+<dt id="flask_classful.FlaskView.get_route_base">
+<em class="property">classmethod </em><code class="descname">get_route_base</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#flask_classful.FlaskView.get_route_base" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the route base to use for the current class.</p>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="flask_classy.FlaskView.make_proxy_method">
-<em class="property">classmethod </em><code class="descname">make_proxy_method</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#flask_classy.FlaskView.make_proxy_method" title="Permalink to this definition">¶</a></dt>
+<dt id="flask_classful.FlaskView.make_proxy_method">
+<em class="property">classmethod </em><code class="descname">make_proxy_method</code><span class="sig-paren">(</span><em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#flask_classful.FlaskView.make_proxy_method" title="Permalink to this definition">¶</a></dt>
 <dd><p>Creates a proxy function that can be used by Flasks routing. The
 proxy instantiates the FlaskView subclass and calls the appropriate
 method.</p>
@@ -1034,15 +1038,15 @@ method.</p>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="flask_classy.FlaskView.parse_options">
-<em class="property">classmethod </em><code class="descname">parse_options</code><span class="sig-paren">(</span><em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#flask_classy.FlaskView.parse_options" title="Permalink to this definition">¶</a></dt>
+<dt id="flask_classful.FlaskView.parse_options">
+<em class="property">classmethod </em><code class="descname">parse_options</code><span class="sig-paren">(</span><em>options</em><span class="sig-paren">)</span><a class="headerlink" href="#flask_classful.FlaskView.parse_options" title="Permalink to this definition">¶</a></dt>
 <dd><p>Extracts subdomain and endpoint values from the options dict and returns
 them along with a new dict without those values.</p>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="flask_classy.FlaskView.register">
-<em class="property">classmethod </em><code class="descname">register</code><span class="sig-paren">(</span><em>app</em>, <em>route_base=None</em>, <em>subdomain=None</em>, <em>route_prefix=None</em>, <em>trailing_slash=None</em><span class="sig-paren">)</span><a class="headerlink" href="#flask_classy.FlaskView.register" title="Permalink to this definition">¶</a></dt>
+<dt id="flask_classful.FlaskView.register">
+<em class="property">classmethod </em><code class="descname">register</code><span class="sig-paren">(</span><em>app</em>, <em>route_base=None</em>, <em>subdomain=None</em>, <em>route_prefix=None</em>, <em>trailing_slash=None</em><span class="sig-paren">)</span><a class="headerlink" href="#flask_classful.FlaskView.register" title="Permalink to this definition">¶</a></dt>
 <dd><p>Registers a FlaskView class for use with a specific instance of a
 Flask app. Any methods not prefixes with an underscore are candidates
 to be routed and will have routes registered when this method is
@@ -1071,14 +1075,15 @@ the class&#8217; route_prefix if it has been set.</li>
 </dd></dl>
 
 <dl class="function">
-<dt id="flask_classy.route">
-<code class="descclassname">flask_classy.</code><code class="descname">route</code><span class="sig-paren">(</span><em>rule</em>, <em>**options</em><span class="sig-paren">)</span><a class="headerlink" href="#flask_classy.route" title="Permalink to this definition">¶</a></dt>
+<dt id="flask_classful.route">
+<code class="descclassname">flask_classful.</code><code class="descname">route</code><span class="sig-paren">(</span><em>rule</em>, <em>**options</em><span class="sig-paren">)</span><a class="headerlink" href="#flask_classful.route" title="Permalink to this definition">¶</a></dt>
 <dd><p>A decorator that is used to define custom routes for methods in
 FlaskView subclasses. The format is exactly the same as Flask&#8217;s
 <cite>&#64;app.route</cite> decorator.</p>
 </dd></dl>
 
 <hr class="docutils" />
+<p>© Copyright 2016 by Teracy, Inc, <a class="reference external" href="https://twitter.com/teracyhq">Follow us &#64;teracyhq</a></p>
 <p>© Copyright 2013 by Freedom Dumlao, <a class="reference external" href="https://twitter.com/APIguy">Follow Me &#64;apiguy</a></p>
 </div>
 </div>
@@ -1091,11 +1096,11 @@ FlaskView subclasses. The format is exactly the same as Flask&#8217;s
         <div class="sphinxsidebarwrapper">
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Flask-Classy</a><ul>
+<li><a class="reference internal" href="#">Flask-Classful</a><ul>
 <li><a class="reference internal" href="#installation">Installation</a></li>
 <li><a class="reference internal" href="#let-s-see-how-it-works">Let&#8217;s see how it works</a></li>
 <li><a class="reference internal" href="#using-custom-routes">Using custom routes</a><ul>
-<li><a class="reference internal" href="#flask-classy-s-way-of-talking-about-routes">Flask-Classy&#8217;s way of talking about &#8220;routes&#8221;</a></li>
+<li><a class="reference internal" href="#flask-classful-s-way-of-talking-about-routes">Flask-Classful&#8217;s way of talking about &#8220;routes&#8221;</a></li>
 <li><a class="reference internal" href="#specifying-a-route-prefix">Specifying a Route Prefix</a><ul>
 <li><a class="reference internal" href="#as-an-attribute">As an attribute:</a></li>
 <li><a class="reference internal" href="#when-registering">When registering:</a></li>
@@ -1161,7 +1166,7 @@ FlaskView subclasses. The format is exactly the same as Flask&#8217;s
       </div>
       <div class="clearer"></div>
     </div>
-<a href="http://github.com/teracyhq/flask-classy">
+<a href="http://github.com/teracyhq/flask-classful">
     <img style="position: fixed; top: 0; right: 0; border: 0;"
          src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"
          alt="Fork me on GitHub"/></a>
