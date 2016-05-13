@@ -96,11 +96,11 @@ the APIs are the same for both.</p>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
 <p>Install the latest extension with:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>$ pip install flask-classful -U
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pip install flask-classful -U
 </pre></div>
 </div>
 <p>Or install the bleeding edge development version with:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span>$ pip install git+https://github.com/teracyhq/flask-classful.git@develop#egg=flask-classful
+<div class="highlight-default"><div class="highlight"><pre><span></span>$ pip install git+https://github.com/teracyhq/flask-classful.git@develop#egg=flask-classful
 </pre></div>
 </div>
 </div>
@@ -109,8 +109,8 @@ the APIs are the same for both.</p>
 <p>If you&#8217;re like me, you probably get a better idea of how to use something
 when you see it being used. Let&#8217;s go ahead and create a little app to
 see how Flask-Classful works:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
-<span class="kn">from</span> <span class="nn">flask_classful</span> <span class="kn">import</span> <span class="n">FlaskView</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask</span> <span class="k">import</span> <span class="n">Flask</span>
+<span class="kn">from</span> <span class="nn">flask_classful</span> <span class="k">import</span> <span class="n">FlaskView</span>
 
 <span class="c1"># we&#39;ll make a list to hold some quotes for our app</span>
 <span class="n">quotes</span> <span class="o">=</span> <span class="p">[</span>
@@ -134,7 +134,7 @@ see how Flask-Classful works:</p>
 <p>Run this app and open your web browser to: <a class="reference external" href="http://localhost:5000/quotes/">http://localhost:5000/quotes/</a></p>
 <p>As you can see, it returns the list of quotes. But what if we just wanted
 one quote? What would we do then?</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">QuotesView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">QuotesView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="o">...</span>
 
@@ -150,10 +150,10 @@ one quote? What would we do then?</p>
 see the very poignant quote from the esteemed Mr. Edison.</p>
 <p>That&#8217;s cool and all, but what if we just wanted a random quote? What then?
 Let&#8217;s add a random view to our FlaskView:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">choice</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">random</span> <span class="k">import</span> <span class="n">choice</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">QuotesView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">QuotesView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="o">...</span>
 
@@ -180,10 +180,10 @@ fix it to be something more spectacular forthwith. In a moment of blind
 inspiration we decide that getting a random quote is on par with receiving
 a rasher of your favorite porcine delicacy. The new URL should be <cite>/quotes/word_bacon/</cite>
 so that everyone knows what a treat they are in for.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask_classful</span> <span class="kn">import</span> <span class="n">FlaskView</span><span class="p">,</span> <span class="n">route</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask_classful</span> <span class="k">import</span> <span class="n">FlaskView</span><span class="p">,</span> <span class="n">route</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">QuotesView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">QuotesView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="o">...</span>
 
@@ -246,7 +246,7 @@ register the FlaskView with the application.</p>
 <h4>As an attribute:<a class="headerlink" href="#as-an-attribute" title="Permalink to this headline">¶</a></h4>
 <p>Using an attribute is a great way to define a default prefix, as you can always
 override this value when you register the FlaskView with your app:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">BurgundyView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">BurgundyView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
     <span class="n">route_prefix</span> <span class="o">=</span> <span class="s1">&#39;/colors/&#39;</span>
 
     <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -258,7 +258,7 @@ override this value when you register the FlaskView with your app:</p>
 <h4>When registering:<a class="headerlink" href="#when-registering" title="Permalink to this headline">¶</a></h4>
 <p>Alternatively (or additionally, if you like) you can specify a route prefix when
 you register the route with your app:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">BurgundyView</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">route_prefix</span><span class="o">=</span><span class="s1">&#39;/redish_colors/&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">BurgundyView</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">route_prefix</span><span class="o">=</span><span class="s1">&#39;/redish_colors/&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>And this will override any route prefixes set on the FlaskView class itself.</p>
@@ -274,7 +274,7 @@ but that&#8217;s hardly a reasonable way to go about it.)</p>
 <p>The first method simply requires you to set a <cite>route_base</cite> attribute on
 your <cite>FlaskView</cite>. Suppose we wanted to make our QuotesView handle the
 root of the web application:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">QuotesView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">QuotesView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
     <span class="n">route_base</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span>
 
     <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -295,7 +295,7 @@ root of the web application:</p>
 you need to be able to specify different base routes for different apps.
 You can specify the route when you register the class with the Flask app
 instance:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">QuotesView</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">route_base</span><span class="o">=</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">QuotesView</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">app</span><span class="p">,</span> <span class="n">route_base</span><span class="o">=</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The second method will always override the first, so you can use method
@@ -309,7 +309,7 @@ one, and override it with method two if needed. Sweet!</p>
 a bad idea</a>). But since you&#8217;re so
 determined let&#8217;s see how to do that anyway.</p>
 <p>So let&#8217;s say you add the following routes to one of your views:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">QuotesView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">QuotesView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
     <span class="n">route_base</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span>
 
     <span class="nd">@route</span><span class="p">(</span><span class="s1">&#39;/quote/&lt;id&gt;&#39;</span><span class="p">)</span>
@@ -364,7 +364,7 @@ allows you to create collisions.</p>
 <p>So you don&#8217;t like the nifty indexing trick? Well fine then. I guess you can
 go ahead and specify your own endpoint if you like but that&#8217;s only because I
 like you.</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">QuotesView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">QuotesView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
     <span class="n">route_base</span> <span class="o">=</span> <span class="s1">&#39;/&#39;</span>
 
     <span class="nd">@route</span><span class="p">(</span><span class="s1">&#39;/quote/&lt;id&gt;&#39;</span><span class="p">,</span> <span class="n">endpoint</span><span class="o">=</span><span class="s1">&#39;show_quote&#39;</span><span class="p">)</span>
@@ -566,7 +566,7 @@ ships with the awesome <cite>url_for</cite> function that does an excellent job 
 turning a function name into a URL that maps to it. You can use <cite>url_for</cite>
 with Flask-Classful by using the format &#8220;&lt;Class name&gt;:&lt;method name&gt;&#8221;. Let&#8217;s
 look at an example:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DuckyView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DuckyView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s2">&quot;Duckies!&quot;</span>
 
@@ -579,15 +579,15 @@ look at an example:</p>
 </pre></div>
 </div>
 <p>In this example, you can get a URL to the index method using:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;DuckyView:index&quot;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;DuckyView:index&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>And you can get a URL to the get method using:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;DuckyView:get&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Howard&quot;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;DuckyView:get&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Howard&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>And for that view with the custom endpoint defined?:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;do_duck_stuff&quot;</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;do_duck_stuff&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -606,7 +606,7 @@ routes for them, whether you&#8217;ve gone and defined your own, or you just
 want to let <cite>FlaskView</cite> do it&#8217;s thing. By default, <cite>FlaskView</cite> will
 create a route that is the same as the method name. So if you define a
 view method in your <cite>FlaskView</cite> like this:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SomeView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SomeView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
     <span class="n">route_base</span> <span class="o">=</span> <span class="s2">&quot;root&quot;</span>
 
     <span class="k">def</span> <span class="nf">my_view</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -634,7 +634,7 @@ view method in your <cite>FlaskView</cite> like this:</p>
 <p>&#8220;That&#8217;s fine.&#8221; you say. &#8220;But what if I have a view method with some
 parameters?&#8221; Well <cite>FlaskView</cite> will try to take care of that for you
 too. If you were to define another view like this:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AnotherView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">AnotherView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
     <span class="n">route_base</span> <span class="o">=</span> <span class="s2">&quot;home&quot;</span>
 
     <span class="k">def</span> <span class="nf">this_view</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg1</span><span class="p">,</span> <span class="n">arg2</span><span class="p">):</span>
@@ -675,7 +675,7 @@ personal touch, don&#8217;t you think?</p>
 excellent extensions that allow you to customize a view&#8217;s behavior
 simply by adding a decorator, and you can use them with your
 FlaskView&#8217;s too.:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">BetterButterView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">BetterButterView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
 
     <span class="nd">@login_required</span>  <span class="c1"># Ain&#39;t it pretty?</span>
     <span class="k">def</span> <span class="nf">super_secret</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -686,7 +686,7 @@ FlaskView&#8217;s too.:</p>
 <cite>FlaskView</cite>? All you need to do is add a <cite>decorators</cite> attribute to the
 class definition with a list of decorators you want applied to every
 method and <cite>Flask-Classful</cite> will take care of the rest:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">WhataGreatView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">WhataGreatView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
     <span class="n">decorators</span> <span class="o">=</span> <span class="p">[</span><span class="n">login_required</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">this_is_secret</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -718,8 +718,8 @@ night before during one of your late night hackathons and it hits you:</p>
 <p>No doubt it&#8217;s an inspired thought, but in this case it was a tragic
 oversight. You realize now how lucky it was that you chose to use
 <cite>Flask-Classful</cite> because adding tracking is going to be a snap:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask_classful</span> <span class="kn">import</span> <span class="n">FlaskView</span>
-<span class="kn">from</span> <span class="nn">made_up_tracking</span> <span class="kn">import</span> <span class="n">track_it</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask_classful</span> <span class="k">import</span> <span class="n">FlaskView</span>
+<span class="kn">from</span> <span class="nn">made_up_tracking</span> <span class="k">import</span> <span class="n">track_it</span>
 
 <span class="k">class</span> <span class="nc">WidgetsView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
 
@@ -750,8 +750,8 @@ too. Let&#8217;s say for example you wanted to run something before the <code cl
 runs? Just create a method called <code class="docutils literal"><span class="pre">before_index</span></code> and <cite>Flask-Classful</cite> will make
 sure it gets run only before that view. (as you have guessed by now,
 <code class="docutils literal"><span class="pre">after_index</span></code> will be run only after the index view).</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask_classful</span> <span class="kn">import</span> <span class="n">FlaskView</span>
-<span class="kn">from</span> <span class="nn">made_up_tracking</span> <span class="kn">import</span> <span class="n">track_it</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">flask_classful</span> <span class="k">import</span> <span class="n">FlaskView</span>
+<span class="kn">from</span> <span class="nn">made_up_tracking</span> <span class="k">import</span> <span class="n">track_it</span>
 
 <span class="k">class</span> <span class="nc">WidgetsView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
 
@@ -873,9 +873,9 @@ application.</p>
 <h3>The Define-During-Registration Method<a class="headerlink" href="#the-define-during-registration-method" title="Permalink to this headline">¶</a></h3>
 <p>Probably the most flexible method, you can define which subdomains you
 want to support at the same time you&#8217;re registering your views:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># views.py</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># views.py</span>
 
-<span class="kn">from</span> <span class="nn">flask_classful</span> <span class="kn">import</span> <span class="n">FlaskView</span>
+<span class="kn">from</span> <span class="nn">flask_classful</span> <span class="k">import</span> <span class="n">FlaskView</span>
 
 <span class="k">class</span> <span class="nc">CoolApiView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
 
@@ -883,10 +883,10 @@ want to support at the same time you&#8217;re registering your views:</p>
         <span class="k">return</span> <span class="s2">&quot;API stuff&quot;</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># main.py</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># main.py</span>
 
-<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
-<span class="kn">from</span> <span class="nn">views</span> <span class="kn">import</span> <span class="n">CoolApiView</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="k">import</span> <span class="n">Flask</span>
+<span class="kn">from</span> <span class="nn">views</span> <span class="k">import</span> <span class="n">CoolApiView</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
 <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;SERVER_NAME&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;socool.biz&#39;</span>
@@ -906,9 +906,9 @@ want to support at the same time you&#8217;re registering your views:</p>
 <h3>The Explicit-Define-In-The-FlaskView Method<a class="headerlink" href="#the-explicit-define-in-the-flaskview-method" title="Permalink to this headline">¶</a></h3>
 <p>Using this method, you can explicitly define a subdomain as an attribute of
 the <code class="docutils literal"><span class="pre">FlaskView</span></code> subclass:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># views.py</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># views.py</span>
 
-<span class="kn">from</span> <span class="nn">flask_classful</span> <span class="kn">import</span> <span class="n">FlaskView</span>
+<span class="kn">from</span> <span class="nn">flask_classful</span> <span class="k">import</span> <span class="n">FlaskView</span>
 
 <span class="k">class</span> <span class="nc">CoolApiView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
     <span class="n">subdomain</span> <span class="o">=</span> <span class="s2">&quot;api&quot;</span>
@@ -917,10 +917,10 @@ the <code class="docutils literal"><span class="pre">FlaskView</span></code> sub
         <span class="k">return</span> <span class="s2">&quot;API Stuff&quot;</span>
 </pre></div>
 </div>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># main.py</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># main.py</span>
 
-<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
-<span class="kn">from</span> <span class="nn">views</span> <span class="kn">import</span> <span class="n">CoolApiView</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="k">import</span> <span class="n">Flask</span>
+<span class="kn">from</span> <span class="nn">views</span> <span class="k">import</span> <span class="n">CoolApiView</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
 <span class="n">app</span><span class="o">.</span><span class="n">config</span><span class="p">[</span><span class="s1">&#39;SERVER_NAME&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;socool.biz&#39;</span>
@@ -946,12 +946,12 @@ you covered. Say you want your API to be able to respond to requests with JSON.
 All you have to do is create a class that defines how to serialize and deserialize
 the data, add it to the <cite>representations</cite> variable on your <cite>FlaskView</cite>.</p>
 <p>Here&#8217;s the code for the JSON Response class:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># representations.py</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># representations.py</span>
 
 <span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">make_response</span>
+<span class="kn">from</span> <span class="nn">flask</span> <span class="k">import</span> <span class="n">make_response</span>
 
-<span class="k">def</span> <span class="nf">output_json</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">output_json</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">content_type</span> <span class="o">=</span> <span class="s1">&#39;application/json&#39;</span>
     <span class="n">dumped</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">headers</span><span class="p">:</span>
@@ -963,10 +963,10 @@ the data, add it to the <cite>representations</cite> variable on your <cite>Flas
 </pre></div>
 </div>
 <p>The go ahead and add this new resource representation to your <cite>FlaskView</cite>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># views.py</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># views.py</span>
 
-<span class="kn">from</span> <span class="nn">flask_classful</span> <span class="kn">import</span> <span class="n">FlaskView</span>
-<span class="kn">from</span> <span class="nn">representations</span> <span class="kn">import</span> <span class="n">output_json</span>
+<span class="kn">from</span> <span class="nn">flask_classful</span> <span class="k">import</span> <span class="n">FlaskView</span>
+<span class="kn">from</span> <span class="nn">representations</span> <span class="k">import</span> <span class="n">output_json</span>
 
 <span class="k">class</span> <span class="nc">CoolJSONView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
     <span class="n">representations</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;application/json&#39;</span><span class="p">:</span> <span class="n">output_json</span><span class="p">}</span>
@@ -1169,9 +1169,6 @@ FlaskView subclasses. The format is exactly the same as Flask&#8217;s
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
 </div>
 <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
