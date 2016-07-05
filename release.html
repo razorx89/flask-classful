@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Release Steps &mdash; Flask Classful 0.11.0 documentation</title>
+    <title>Release Steps &mdash; Flask Classful 0.12.0 documentation</title>
     
     <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.11.0',
+        VERSION:     '0.12.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Flask Classful 0.11.0 documentation" href="index.html" />
+    <link rel="top" title="Flask Classful 0.12.0 documentation" href="index.html" />
  
 
 <link media="only screen and (max-device-width: 480px)" href="_static/small_flask.css"
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Flask Classful 0.11.0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Flask Classful 0.12.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -61,8 +61,8 @@
 - flask_classful.py
 - docs/conf.py</p>
 </div>
-<div class="section" id="changelog">
-<h2>CHANGELOG<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="changelog-md">
+<h2>CHANGELOG.md<a class="headerlink" href="#changelog-md" title="Permalink to this headline">¶</a></h2>
 <p>update the change log</p>
 </div>
 <div class="section" id="flask-classful-py">
@@ -84,7 +84,14 @@
 </div>
 <div class="section" id="upload-the-tagged-version-to-pypi">
 <h2>Upload the tagged version to PyPI<a class="headerlink" href="#upload-the-tagged-version-to-pypi" title="Permalink to this headline">¶</a></h2>
-<p>Follow: <a class="reference external" href="http://python-packaging-user-guide.readthedocs.io/en/latest/distributing/">http://python-packaging-user-guide.readthedocs.io/en/latest/distributing/</a></p>
+<p><code class="docutils literal"><span class="pre">`</span>
+<span class="pre">$</span> <span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">vX.X.X</span>
+<span class="pre">$</span> <span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">sdist</span> <span class="pre">bdist_wheel</span> <span class="pre">--universal</span>
+<span class="pre">$</span> <span class="pre">twine</span> <span class="pre">upload</span> <span class="pre">dist/*</span>
+<span class="pre">`</span></code></p>
+<p>Ref:
+- <a class="reference external" href="http://python-packaging-user-guide.readthedocs.io/en/latest/distributing/">http://python-packaging-user-guide.readthedocs.io/en/latest/distributing/</a>
+- <a class="reference external" href="https://github.com/pypa/twine">https://github.com/pypa/twine</a></p>
 </div>
 </div>
 
@@ -98,7 +105,7 @@
   <ul>
 <li><a class="reference internal" href="#">Release Steps</a><ul>
 <li><a class="reference internal" href="#next-iteration">Next iteration</a></li>
-<li><a class="reference internal" href="#changelog">CHANGELOG</a></li>
+<li><a class="reference internal" href="#changelog-md">CHANGELOG.md</a></li>
 <li><a class="reference internal" href="#flask-classful-py">flask_classful.py</a></li>
 <li><a class="reference internal" href="#docs-conf-py">docs/conf.py</a></li>
 <li><a class="reference internal" href="#upload-the-tagged-version-to-pypi">Upload the tagged version to PyPI</a></li>
@@ -120,8 +127,8 @@
 <div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
     </form>
