@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Flask-Classful &mdash; Flask Classful 0.12.0 documentation</title>
+    <title>Flask-Classful &mdash; Flask Classful 0.13.0 documentation</title>
     
     <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -14,7 +14,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.12.0',
+        VERSION:     '0.13.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -23,7 +23,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Flask Classful 0.12.0 documentation" href="#" />
+    <link rel="top" title="Flask Classful 0.13.0 documentation" href="#" />
  
 
 <link media="only screen and (max-device-width: 480px)" href="_static/small_flask.css"
@@ -45,7 +45,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">Flask Classful 0.12.0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="#">Flask Classful 0.13.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -621,7 +621,7 @@ view method in your <cite>FlaskView</cite> like this:</p>
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><strong>rule</strong></td>
-<td>/some/my_view/</td>
+<td>/root/my_view/</td>
 </tr>
 <tr class="row-even"><td><strong>endpoint</strong></td>
 <td>SomeView:my_view</td>
@@ -665,6 +665,35 @@ too. If you were to define another view like this:</p>
 parameters, so if you want or need them you&#8217;ll need to define the
 route yourself using the <cite>&#64;route</cite> decorator.</p>
 </div>
+<p>Sometimes that you need to use <cite>my-view</cite> instead of default <cite>my_view</cite> generated route, you can
+use <cite>method_dashified</cite> attribute when defining the view class or when registering the view with the
+app. For example:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SomeView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
+    <span class="n">route_base</span> <span class="o">=</span> <span class="s2">&quot;root&quot;</span>
+    <span class="n">method_dashified</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">my_view</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;Check out my view!&quot;</span>
+</pre></div>
+</div>
+<p><cite>FlaskView</cite> will generate a route like this:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="27%" />
+<col width="73%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>rule</strong></td>
+<td>/root/my-view/</td>
+</tr>
+<tr class="row-even"><td><strong>endpoint</strong></td>
+<td>SomeView:my_view</td>
+</tr>
+<tr class="row-odd"><td><strong>method</strong></td>
+<td>GET</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section" id="decorating-tips">
 <h2>Decorating Tips<a class="headerlink" href="#decorating-tips" title="Permalink to this headline">¶</a></h2>
@@ -1057,7 +1086,7 @@ them along with a new dict without those values.</p>
 
 <dl class="classmethod">
 <dt id="flask_classful.FlaskView.register">
-<em class="property">classmethod </em><code class="descname">register</code><span class="sig-paren">(</span><em>app</em>, <em>route_base=None</em>, <em>subdomain=None</em>, <em>route_prefix=None</em>, <em>trailing_slash=None</em><span class="sig-paren">)</span><a class="headerlink" href="#flask_classful.FlaskView.register" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">register</code><span class="sig-paren">(</span><em>app</em>, <em>route_base=None</em>, <em>subdomain=None</em>, <em>route_prefix=None</em>, <em>trailing_slash=None</em>, <em>method_dashified=None</em><span class="sig-paren">)</span><a class="headerlink" href="#flask_classful.FlaskView.register" title="Permalink to this definition">¶</a></dt>
 <dd><p>Registers a FlaskView class for use with a specific instance of a
 Flask app. Any methods not prefixes with an underscore are candidates
 to be routed and will have routes registered when this method is
@@ -1076,6 +1105,10 @@ configuring routes.</li>
 <li><strong>route_prefix</strong> &#8211; A prefix to be applied to all routes registered
 for this class. Precedes route_base. Overrides
 the class&#8217; route_prefix if it has been set.</li>
+<li><strong>trailing_slash</strong> &#8211; An option to put trailing slashes at the end of routes
+without parameters.</li>
+<li><strong>method_dashified</strong> &#8211; An option to dashify method name from some_route to /some-route/
+route instead of default /some_route/</li>
 </ul>
 </td>
 </tr>
