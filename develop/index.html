@@ -23,6 +23,8 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
     <link rel="top" title="Flask Classful 0.14.0-dev0 documentation" href="#" />
  
 
@@ -1086,7 +1088,7 @@ them along with a new dict without those values.</p>
 
 <dl class="classmethod">
 <dt id="flask_classful.FlaskView.register">
-<em class="property">classmethod </em><code class="descname">register</code><span class="sig-paren">(</span><em>app</em>, <em>route_base=None</em>, <em>subdomain=None</em>, <em>route_prefix=None</em>, <em>trailing_slash=None</em>, <em>method_dashified=None</em><span class="sig-paren">)</span><a class="headerlink" href="#flask_classful.FlaskView.register" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">register</code><span class="sig-paren">(</span><em>app</em>, <em>route_base=None</em>, <em>subdomain=None</em>, <em>route_prefix=None</em>, <em>trailing_slash=None</em>, <em>method_dashified=None</em>, <em>base_class=None</em><span class="sig-paren">)</span><a class="headerlink" href="#flask_classful.FlaskView.register" title="Permalink to this definition">¶</a></dt>
 <dd><p>Registers a FlaskView class for use with a specific instance of a
 Flask app. Any methods not prefixes with an underscore are candidates
 to be routed and will have routes registered when this method is
