@@ -1019,11 +1019,11 @@ the data, add it to the <cite>representations</cite> variable on your <cite>Flas
     <span class="k">return</span> <span class="n">response</span>
 </pre></div>
 </div>
-<p>The go ahead and add this new resource representation to your <cite>FlaskView</cite>:</p>
+<p>Then go ahead and add this new resource representation to your <cite>FlaskView</cite>:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># views.py</span>
 
 <span class="kn">from</span> <span class="nn">flask_classful</span> <span class="k">import</span> <span class="n">FlaskView</span>
-<span class="kn">from</span> <span class="nn">representations</span> <span class="k">import</span> <span class="n">output_json</span>
+<span class="kn">from</span> <span class="nn">.representations</span> <span class="k">import</span> <span class="n">output_json</span>
 
 <span class="k">class</span> <span class="nc">CoolJSONView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
     <span class="n">representations</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;application/json&#39;</span><span class="p">:</span> <span class="n">output_json</span><span class="p">}</span>
@@ -1032,6 +1032,78 @@ the data, add it to the <cite>representations</cite> variable on your <cite>Flas
         <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;This is JSON&#39;</span><span class="p">:</span> <span class="s1">&#39;How Cool is that&#39;</span><span class="p">}</span>
 </pre></div>
 </div>
+<p>The <code class="docutils literal"><span class="pre">representations</span></code> attribute is a dictionary in which each key is a content type and the value
+is a <code class="docutils literal"><span class="pre">flask.make_response</span></code> proxy function with the same signature.</p>
+<p>By default, the <code class="docutils literal"><span class="pre">representations</span></code> class attribute is an empty dictionary.</p>
+<p>When the <code class="docutils literal"><span class="pre">representations</span></code> dictionary is not empty and if the view function returns a
+<code class="docutils literal"><span class="pre">flask.wrappers.ResponseBase</span></code> instance, it will be returned immediately to <code class="docutils literal"><span class="pre">Flask</span></code> to handle
+the rest. Otherwise, <code class="docutils literal"><span class="pre">Flask-Classful</span></code> will try to find the best match between the accepted content
+type and the keys in the <code class="docutils literal"><span class="pre">representations</span></code> dictionary, and call the associated output proxy
+function to create a <code class="docutils literal"><span class="pre">flask.wrappers.ResponseBase</span></code> instance. If no matching output proxy function
+is found when <code class="docutils literal"><span class="pre">Flask-Classful</span></code> looks up, it will call the first key’s value in the dictionary (This
+behavior could change in the future, maybe just return the data?).</p>
+<p>//TODO(hoatle): <a class="reference external" href="https://github.com/teracyhq/flask-classful/issues/72">https://github.com/teracyhq/flask-classful/issues/72</a></p>
+<p>This is an example where the view function returns a <code class="docutils literal"><span class="pre">flask.wrappers.ResponseBase</span></code> instance,
+skipping the <code class="docutils literal"><span class="pre">representations</span></code> system entirely:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># views.py</span>
+
+<span class="kn">from</span> <span class="nn">flask</span> <span class="k">import</span> <span class="n">redirect</span>
+<span class="kn">from</span> <span class="nn">flask_classful</span> <span class="k">import</span> <span class="n">FlaskView</span>
+<span class="kn">from</span> <span class="nn">.representations</span> <span class="k">import</span> <span class="n">output_json</span>
+
+<span class="k">class</span> <span class="nc">CoolJSONView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
+    <span class="n">representations</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;application/json&#39;</span><span class="p">:</span> <span class="n">output_json</span><span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">redirect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s2">&quot;http://flask-classful.teracy.org&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="type-hints-support-for-python-3">
+<h2>Type Hints Support for Python 3<a class="headerlink" href="#type-hints-support-for-python-3" title="Permalink to this headline">¶</a></h2>
+<p>With Python 3, you can use <a class="reference external" href="https://docs.python.org/3/library/typing.html">type hints</a> for a view
+function’s arguments. By using these, you can have very simple, and convenient type input validation
+and conversion for a view function. If a view function is called with parameters of the wrong type,
+the view function will not be called and a <code class="docutils literal"><span class="pre">404</span></code> HTTP status code will be returned.</p>
+<p>This is an example of type hinting support:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># python3 only</span>
+
+<span class="k">class</span> <span class="nc">TypingView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;Index&quot;</span>
+
+    <span class="nd">@route</span><span class="p">(</span><span class="s1">&#39;/&lt;id&gt;&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;POST&#39;</span><span class="p">])</span>
+    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Post&quot;</span>
+
+    <span class="k">def</span> <span class="nf">patch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Patch&quot;</span>
+
+    <span class="k">def</span> <span class="nf">int</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">float</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">uuid</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">arg</span><span class="p">:</span> <span class="n">UUID</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This is the current default <code class="docutils literal"><span class="pre">type_hints</span></code> class attribute of the <code class="docutils literal"><span class="pre">FlaskView</span></code> class:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># supported type hints used to determine url variable converters</span>
+<span class="n">type_hints</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nb">str</span><span class="p">:</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span>
+    <span class="nb">int</span><span class="p">:</span> <span class="s1">&#39;int&#39;</span><span class="p">,</span>
+    <span class="nb">float</span><span class="p">:</span> <span class="s1">&#39;float&#39;</span><span class="p">,</span>
+    <span class="n">UUID</span><span class="p">:</span> <span class="s1">&#39;uuid&#39;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You can override as much as you wish for your application, see more at
+<a class="reference external" href="http://flask.pocoo.org/docs/0.12/api/#url-route-registrations">URL Route Registrations</a> and
+<a class="reference external" href="http://flask.pocoo.org/docs/0.12/api/#flask.Flask.url_map">flask.Flask.url_map</a></p>
+<p>In the future, we can add a more sophisticated mechanism for type hinting and conversion.</p>
 </div>
 <div class="section" id="questions">
 <h2>Questions?<a class="headerlink" href="#questions" title="Permalink to this headline">¶</a></h2>
@@ -1138,6 +1210,7 @@ routes without parameters.</li>
 <li><strong>method_dashified</strong> – An option to dashify method name from
 some_route to /some-route/ route instead of
 default /some_route/</li>
+<li><strong>base_class</strong> – Allow specifying an alternate base class for customization instead of the default FlaskView</li>
 <li><strong>rule_options</strong> – The options are passed to 
 <code class="xref py py-class docutils literal"><span class="pre">Rule</span></code> object.</li>
 </ul>
@@ -1209,6 +1282,7 @@ FlaskView subclasses. The format is exactly the same as Flask’s
 </ul>
 </li>
 <li><a class="reference internal" href="#adding-resource-representations-get-real-classy-and-put-on-a-top-hat">Adding Resource Representations (Get real classy and put on a top hat)</a></li>
+<li><a class="reference internal" href="#type-hints-support-for-python-3">Type Hints Support for Python 3</a></li>
 <li><a class="reference internal" href="#questions">Questions?</a></li>
 <li><a class="reference internal" href="#api">API</a></li>
 </ul>
