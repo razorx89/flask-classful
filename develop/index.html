@@ -1101,11 +1101,10 @@ is a <code class="docutils literal"><span class="pre">flask.make_response</span>
 <p>When the <code class="docutils literal"><span class="pre">representations</span></code> dictionary is not empty and if the view function returns a
 <code class="docutils literal"><span class="pre">flask.wrappers.ResponseBase</span></code> instance, it will be returned immediately to <code class="docutils literal"><span class="pre">Flask</span></code> to handle
 the rest. Otherwise, <code class="docutils literal"><span class="pre">Flask-Classful</span></code> will try to find the best match between the accepted content
-type and the keys in the <code class="docutils literal"><span class="pre">representations</span></code> dictionary, and call the associated output proxy
+types and the keys in the <code class="docutils literal"><span class="pre">representations</span></code> dictionary, and call the associated output proxy
 function to create a <code class="docutils literal"><span class="pre">flask.wrappers.ResponseBase</span></code> instance. If no matching output proxy function
-is found when <code class="docutils literal"><span class="pre">Flask-Classful</span></code> looks up, it will call the first key’s value in the dictionary (This
-behavior could change in the future, maybe just return the data?).</p>
-<p>//TODO(hoatle): <a class="reference external" href="https://github.com/teracyhq/flask-classful/issues/72">https://github.com/teracyhq/flask-classful/issues/72</a></p>
+is found when <code class="docutils literal"><span class="pre">Flask-Classful</span></code> looks for one, then the data the view returns
+is passed straight to <code class="docutils literal"><span class="pre">Flask's</span></code> <code class="docutils literal"><span class="pre">make_response</span></code> and returned as is.</p>
 <p>This is an example where the view function returns a <code class="docutils literal"><span class="pre">flask.wrappers.ResponseBase</span></code> instance,
 skipping the <code class="docutils literal"><span class="pre">representations</span></code> system entirely:</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># views.py</span>
@@ -1120,6 +1119,32 @@ skipping the <code class="docutils literal"><span class="pre">representations</s
     <span class="k">def</span> <span class="nf">redirect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s2">&quot;http://flask-classful.teracy.org&quot;</span><span class="p">)</span>
 </pre></div>
+</div>
+<p>To define a default representation that is used when no other matches are
+found, you can add the <code class="docutils literal"><span class="pre">flask-classful/default</span></code> mimetype to your
+representations dictionary, like so:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># views.py</span>
+
+<span class="kn">from</span> <span class="nn">flask_classful</span> <span class="k">import</span> <span class="n">FlaskView</span>
+<span class="kn">from</span> <span class="nn">.representations</span> <span class="k">import</span> <span class="n">output_default</span><span class="p">,</span> <span class="n">output_json</span>
+
+<span class="k">class</span> <span class="nc">CoolDefaultView</span><span class="p">(</span><span class="n">FlaskView</span><span class="p">):</span>
+    <span class="n">representations</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;application/json&#39;</span><span class="p">:</span> <span class="n">output_json</span><span class="p">,</span>
+                       <span class="s1">&#39;flask-classful/default&#39;</span><span class="p">:</span> <span class="n">output_default</span><span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;defaults&#39;</span><span class="p">:</span> <span class="s1">&#39;are cool, yo&#39;</span><span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">“Find the best match” means comparing the accepted mimetypes and their
+q-factor weighting to the list of representation mimetypes. That is, Flask
+Classful does no special heuristics in finding this best match. For more
+information, see <a href="#id4"><span class="problematic" id="id5">`this MDN article on the Accept
+header&lt;https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept&gt;`_</span></a>
+or <a href="#id6"><span class="problematic" id="id7">`this snippet&lt;http://flask.pocoo.org/snippets/45/&gt;`_</span></a> about Werkzeug’s
+<code class="docutils literal"><span class="pre">best_match</span></code> helper.</p>
 </div>
 </div>
 <div class="section" id="type-hints-support-for-python-3">
