@@ -5,13 +5,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Flask-Classful &#8212; Flask Classful 0.14.0 documentation</title>
+    <title>Flask-Classful &#8212; Flask Classful 0.14.1 documentation</title>
     <link rel="stylesheet" href="_static/flasky.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    './',
-        VERSION:     '0.14.0',
+        VERSION:     '0.14.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true,
@@ -44,7 +44,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">Flask Classful 0.14.0 documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="#">Flask Classful 0.14.1 documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -1250,6 +1250,52 @@ any of them. For example:</p>
 <p>By passing <code class="docutils literal"><span class="pre">MyBaseView</span></code> as the <code class="docutils literal"><span class="pre">base_class</span></code> to the <code class="docutils literal"><span class="pre">register</span></code> call, we will now
 properly ignore <code class="docutils literal"><span class="pre">foo</span></code> and it will not become a route!</p>
 </div>
+<div class="section" id="migration">
+<h2>Migration<a class="headerlink" href="#migration" title="Permalink to this headline">¶</a></h2>
+<p>We will avoid introducing breaking changes immediately for a release but should add deprecated warnings
+before breaking things for the next version releases to make it always backward-compatible.</p>
+<p>However, there are still some breaking changes that you must follow to upgrade <code class="docutils literal"><span class="pre">Flask-Classful</span></code>.</p>
+<div class="section" id="from-v0-13-1-to-v0-14-0">
+<h3>From v0.13.1 to v0.14.0<a class="headerlink" href="#from-v0-13-1-to-v0-14-0" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><dl class="first docutils">
+<dt>The behavior of the trailing slash is changed: redirect by default when no trailing slash, see:</dt>
+<dd><ul class="first simple">
+<li><a class="reference external" href="https://github.com/teracyhq/flask-classful/issues/47">https://github.com/teracyhq/flask-classful/issues/47</a></li>
+</ul>
+<p class="last">=&gt; If you don’t want to see 301 redirect, set <cite>trailing_slash</cite> option to <cite>False</cite>.</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">The behavior of the representations is changed: return content by default when no matching registered
+representation instead of returning the first output from the first registered representation. Allow
+specififying the default representation when no matching with <cite>flask-classful/default</cite> mime type,
+see:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="https://github.com/teracyhq/flask-classful/issues/72">https://github.com/teracyhq/flask-classful/issues/72</a></li>
+</ul>
+<p>=&gt; You need to specify the default representation.</p>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="from-v0-10-0-to-v0-11-0">
+<h3>From v0.10.0 to v0.11.0<a class="headerlink" href="#from-v0-10-0-to-v0-11-0" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><dl class="first docutils">
+<dt>The order in which <cite>FlaskView</cite> decorators are applied has been reversed, see:</dt>
+<dd><ul class="first simple">
+<li><a class="reference external" href="https://github.com/teracyhq/flask-classful/commit/686be6ef6fd09d9c1719fa89763ad09baddf7fd0">https://github.com/teracyhq/flask-classful/commit/686be6ef6fd09d9c1719fa89763ad09baddf7fd0</a></li>
+<li><a class="reference external" href="https://github.com/teracyhq/flask-classful/issues/49">https://github.com/teracyhq/flask-classful/issues/49</a></li>
+</ul>
+<p class="last">=&gt; You need to make sure the decorators are in the right order.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
 <div class="section" id="questions">
 <h2>Questions?<a class="headerlink" href="#questions" title="Permalink to this headline">¶</a></h2>
 <p>Feel free to ping me on twitter &#64;teracyhq, or head on over to the
@@ -1434,6 +1480,11 @@ FlaskView subclasses. The format is exactly the same as Flask’s
 </ul>
 </li>
 <li><a class="reference internal" href="#providing-your-own-base-class">Providing your OWN base class</a></li>
+<li><a class="reference internal" href="#migration">Migration</a><ul>
+<li><a class="reference internal" href="#from-v0-13-1-to-v0-14-0">From v0.13.1 to v0.14.0</a></li>
+<li><a class="reference internal" href="#from-v0-10-0-to-v0-11-0">From v0.10.0 to v0.11.0</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#questions">Questions?</a></li>
 <li><a class="reference internal" href="#api">API</a></li>
 </ul>
