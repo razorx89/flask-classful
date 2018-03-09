@@ -22,7 +22,7 @@ _py2 = sys.version_info[0] == 2
 __version__ = "0.15.0-dev0"
 
 
-def route(rule, **options):
+def route(rule, absolute=False, **options):
     """A decorator that is used to define custom routes for methods in
     FlaskView subclasses. The format is exactly the same as Flask's
     `@app.route` decorator.
@@ -31,11 +31,11 @@ def route(rule, **options):
     def decorator(f):
         # Put the rule cache on the method itself instead of globally
         if not hasattr(f, '_rule_cache') or f._rule_cache is None:
-            f._rule_cache = {f.__name__: [(rule, options)]}
+            f._rule_cache = {f.__name__: [(absolute, rule, options)]}
         elif f.__name__ not in f._rule_cache:
-            f._rule_cache[f.__name__] = [(rule, options)]
+            f._rule_cache[f.__name__] = [(absolute, rule, options)]
         else:
-            f._rule_cache[f.__name__].append((rule, options))
+            f._rule_cache[f.__name__].append((absolute, rule, options))
 
         return f
 
@@ -140,8 +140,8 @@ class FlaskView(object):
             try:
                 if hasattr(value, "_rule_cache") and name in value._rule_cache:
                     for idx, cached_rule in enumerate(value._rule_cache[name]):
-                        rule, options = cached_rule
-                        rule = cls.build_rule(rule)
+                        is_absolute, rule, options = cached_rule
+                        rule = cls.build_rule(rule, is_absolute=is_absolute)
                         sub, ep, options = cls.parse_options(options)
 
                         if not subdomain and sub:
@@ -315,7 +315,7 @@ class FlaskView(object):
         return proxy
 
     @classmethod
-    def build_rule(cls, rule, method=None):
+    def build_rule(cls, rule, method=None, is_absolute=False):
         """Creates a routing rule based on either the class name (minus the
         'View' suffix) or the defined `route_base` attribute of the class
 
@@ -333,7 +333,7 @@ class FlaskView(object):
             rule_parts.append(cls.route_prefix)
 
         route_base = cls.get_route_base()
-        if route_base:
+        if route_base and not is_absolute:
             rule_parts.append(route_base)
         if len(rule) > 0:  # the case of rule='' empty string
             rule_parts.append(rule)
